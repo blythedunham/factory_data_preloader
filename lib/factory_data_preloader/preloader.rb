@@ -40,6 +40,11 @@ module FactoryDataPreloader
         print "(#{format('%.3f', benchmark_measurement.real)} secs)\n"
         data
       end
+    rescue Exception => e
+      print "\nException while preloading factory data.  #{self.model_class.to_s}\n"
+      print "#{e}\n"
+      e.backtrace.each {|line| print "#{line}\n"}
+      raise e
     end
 
     def dependencies
